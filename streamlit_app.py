@@ -61,9 +61,17 @@ with launch_days:
 ##### Topics of Products
 
 st.header("Most Used Product Topic / Tag")
-topic_1 = duckdb.sql("SELECT T1 as Topic, COUNT(*) as Count FROM df GROUP BY Topic HAVING Count > 5 ORDER BY Count DESC").df()
-topic_1_bar = px.bar(topic_1, x='Topic', y='Count')
-st.plotly_chart(topic_1_bar, use_container_width=True)
+topic_1_bar, topic_1_pie = st.columns(2)
+
+
+with topic_1_bar:
+    topic_1 = duckdb.sql("SELECT T1 as Topic, COUNT(*) as Count FROM df GROUP BY Topic HAVING Count > 5 ORDER BY Count DESC").df()
+    topic_1_bar = px.bar(topic_1, x='Topic', y='Count')
+    st.plotly_chart(topic_1_bar, use_container_width=True)
+
+with topic_1_pie:
+    topic_1_pie = px.pie(topic_1, values='Count', names='Topic')
+    st.plotly_chart(topic_1_pie, use_container_width=True)
 
 st.header("Top Products Launch Day (Under Day Rank #10)")
 top_10_bar, top_10_pie = st.columns(2)
