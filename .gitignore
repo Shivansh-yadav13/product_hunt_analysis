@@ -1,2 +1,3 @@
 .venv
 geckodriver.exe
+/raw_data
