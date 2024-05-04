@@ -7,15 +7,16 @@ import numpy as np
 
 ph_data = pd.DataFrame()
 
-driver = webdriver.Firefox()
+driver = webdriver.Edge()
 
-start_date = 6
-end_date = 10
-month = 2
+sub_folder = 'april'
+start_date = 26
+end_date = 30
+month = 4
 
 for k in range(start_date, (end_date+1)):
   driver.get(f"https://www.producthunt.com/leaderboard/daily/2024/{month}/{k}/all")
-  time.sleep(2)
+  time.sleep(4)
 
   page_df = pd.DataFrame()
 
@@ -35,7 +36,7 @@ for k in range(start_date, (end_date+1)):
     # product_el.click()
     driver.execute_script("arguments[0].click();", product_el)
 
-    time.sleep(10)
+    time.sleep(8)
 
     '''
       Scraping Tags
@@ -45,21 +46,33 @@ for k in range(start_date, (end_date+1)):
       topic_1_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div[2]/div[1]/div[2]/div[3]/div/a[1]/div/div/span')
       topic_1 = topic_1_el.text
     except:
-      pass
+      try:
+        topic_1_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[1]/div[2]/div[3]/div/a[1]/div/div/span')
+        topic_1 = topic_1_el.text
+      except:
+        pass
 
     topic_2 = np.nan
     try:
       topic_2_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div[2]/div[1]/div[2]/div[3]/div/a[2]/div/div/span')
       topic_2 = topic_2_el.text
     except:
-      pass
+      try:
+        topic_2_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[1]/div[2]/div[3]/div/a[2]/div/div/span')
+        topic_2 = topic_2_el.text
+      except:
+        pass
 
     topic_3 = np.nan
     try:
       topic_3_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div[2]/div[1]/div[2]/div[3]/div/a[3]/div/div/span')
       topic_3 = topic_3_el.text
     except:
-      pass
+      try:
+        topic_3_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[1]/div[2]/div[3]/div/a[3]/div/div/span')
+        topic_3 = topic_3_el.text
+      except:
+        pass
 
     '''
       Scraping Name
@@ -99,7 +112,11 @@ for k in range(start_date, (end_date+1)):
       link_el = driver.find_element(By.CSS_SELECTOR, '[data-test="embed-btn"]')
       link = link_el.get_attribute('href')
     except:
-      pass
+      try:
+        link_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div[4]/div')
+        link = link_el.text
+      except:
+        pass
 
     '''
       Scraping upvotes
@@ -115,7 +132,12 @@ for k in range(start_date, (end_date+1)):
         upvotes_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div[2]/div[4]/div[2]/div[4]/div[1]/div[2]')
         upvotes = int(upvotes_el.text)
       except:
-        pass
+        try:
+          # on Edge
+          upvotes_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[4]/div[2]/div[4]/div[1]/div[2]')
+          upvotes = int(upvotes_el.text)
+        except:
+          pass
 
 
     '''
@@ -134,7 +156,12 @@ for k in range(start_date, (end_date+1)):
         reviews_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div[2]/div[4]/div[2]/div[2]/div/div[1]/div/div[1]/a[1]')
         reviews = int(reviews_el.text)
       except:
-        pass
+        # on Edge
+        try:
+          reviews_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[4]/div[2]/div[2]/div/div[1]/div/div[1]/div[1]')
+          reviews = int(reviews_el.text)
+        except:
+          pass
     
     
     '''
@@ -143,8 +170,16 @@ for k in range(start_date, (end_date+1)):
     rating = np.nan
 
     if reviews > 0:
-      rating_el = driver.find_element(By.PARTIAL_LINK_TEXT, '★')
-      rating = rating_el.text
+      try:
+        rating_el = driver.find_element(By.PARTIAL_LINK_TEXT, '/5 ★')
+        rating = rating_el.text
+      except:
+        try:
+          rating_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[4]/div[2]/div[3]/a[4]')
+          rating = rating_el.text
+        except:
+          pass
+
 
     
     '''
@@ -159,7 +194,11 @@ for k in range(start_date, (end_date+1)):
         comments_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div[2]/div[4]/div[2]/div[4]/div[3]/div[2]')
         comments = int(comments_el.text)
       except:
-        pass
+        try:
+          comments_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[4]/div[2]/div[4]/div[3]/div[2]')
+          comments = int(comments_el.text)
+        except:
+          pass
     
     '''
       Scraping Day Rank
@@ -175,7 +214,11 @@ for k in range(start_date, (end_date+1)):
         day_rank_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div[2]/div[4]/div[2]/div[4]/div[5]/div[2]')
         day_rank = day_rank_el.text
       except:
-        pass
+        try:
+          day_rank_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[4]/div[2]/div[4]/div[5]/div[2]')
+          day_rank = day_rank_el.text
+        except:
+          pass
     
     '''
       Scraping Week Rank
@@ -191,7 +234,11 @@ for k in range(start_date, (end_date+1)):
         week_rank_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div[2]/div[4]/div[2]/div[4]/div[7]/div[2]')
         week_rank = week_rank_el.text
       except:
-        pass
+        try:
+          week_rank_el = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div[4]/div[2]/div[4]/div[7]/div[2]')
+          week_rank = week_rank_el.text
+        except:
+          pass
 
     try:
       close_btn = driver.find_element(By.CLASS_NAME, 'styles_close__gzHdp')
@@ -229,9 +276,9 @@ for k in range(start_date, (end_date+1)):
       product_el = driver.find_element(By.XPATH, f'/html/body/div[1]/div/main/div/div[2]/div[{i}]')
     except:
       break
-    time.sleep(2)
+    time.sleep(4)
   
   ph_data = pd.concat([ph_data, page_df])
 
-ph_data.to_csv(f"./data/{start_date}_to_{end_date}_feb_2024.csv")
+ph_data.to_csv(f"./raw_data/{sub_folder}/{start_date}_to_{end_date}_{sub_folder}_2024.csv")
 driver.close()
