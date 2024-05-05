@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import duckdb
-import plotly.figure_factory as ff
 import plotly.express as px
 
 st.image("ph_banner.png", use_column_width=True)
