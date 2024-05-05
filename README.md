@@ -1,5 +1,7 @@
 # Product Hunt Launch Analysis
 
+![Banner](/images/ph_banner.png)
+
 ## Dataset
 The dataset is of the products launched on Product Hunt from January - April 2024. This data was scrapped using a python script using selenium. This dataset will help us to analyze the factors that leads to a successful Product Hunt launch.
 
