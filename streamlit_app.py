@@ -3,7 +3,7 @@ import pandas as pd
 import duckdb
 import plotly.express as px
 
-st.image("ph_banner.png", use_column_width=True)
+st.image("./images/ph_banner.png", use_column_width=True)
 st.title("Product Hunt Analysis (January - April 2024)")
 
 @st.cache_data
