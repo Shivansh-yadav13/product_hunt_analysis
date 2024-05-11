@@ -9,10 +9,10 @@ ph_data = pd.DataFrame()
 
 driver = webdriver.Edge()
 
-sub_folder = 'april'
-start_date = 26
-end_date = 30
-month = 4
+sub_folder = 'may'
+start_date = 10
+end_date = start_date
+month = 5
 
 for k in range(start_date, (end_date+1)):
   driver.get(f"https://www.producthunt.com/leaderboard/daily/2024/{month}/{k}/all")
@@ -280,5 +280,6 @@ for k in range(start_date, (end_date+1)):
   
   ph_data = pd.concat([ph_data, page_df])
 
-ph_data.to_csv(f"./raw_data/{sub_folder}/{start_date}_to_{end_date}_{sub_folder}_2024.csv")
+ph_data.to_csv(f"./raw_data/{sub_folder}/{start_date}.csv")
+# ph_data.to_csv(f"./raw_data/{sub_folder}/{start_date}_to_{end_date}_{sub_folder}_2024.csv")
 driver.close()
