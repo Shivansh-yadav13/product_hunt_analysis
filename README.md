@@ -113,3 +113,5 @@ We can observer the top 5 categories of top products except `Productivity` are:
 - The "Productivity" category dominates the launch topics, followed by other specialized areas like Design Tools, Marketing, Android, Artificial Intelligence, and SaaS. This suggests a strong interest in productivity-enhancing tools among Product Hunt users.
 
 This analysis provides actionable insights for product creators looking to optimize their launch strategy on Product Hunt. By understanding the dynamics of upvotes, day ranks, launch days, and pricing models, creators can better position their products for success.
+
+### [Checkout the Excel Report](https://1drv.ms/x/c/42733ca0d53e0690/EfvKx7cxeFdMuV30mbcxrpsB_yc0E7_JvPT6SqcdnHhSwA?e=FcTh1i&nav=MTVfe0RDRUM1Nzk1LTNCNTctNEQ0Qy05NEEyLTgwMjkxQzUwNkY2Mn0) 
